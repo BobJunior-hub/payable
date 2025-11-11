@@ -27,7 +27,7 @@ export const getUsers = async () => {
 };
 
 export const getUserByEmail = async (email: string) => {
-  return fetchAPI(`/users/${email}`);
+  return fetchAPI(`/user/${email}`);
 };
 
 // ========== EXPENSES ==========
@@ -43,7 +43,7 @@ export const createExpense = async (expense: Omit<Expense, 'id' | 'createdAt'>) 
 };
 
 export const updateExpenseStatus = async (id: string, status: 'paid' | 'not_paid', userId?: string) => {
-  return fetchAPI(`/expenses/${id}/status`, {
+  return fetchAPI(`/expense-status/${id}/status`, {
     method: 'PATCH',
     body: JSON.stringify({ status, userId }),
   });
@@ -62,32 +62,32 @@ export const createUserRequest = async (name: string, email: string) => {
 };
 
 export const approveUserRequest = async (requestId: string, role: UserRole, approvedBy: string) => {
-  return fetchAPI(`/user-requests/${requestId}/approve`, {
+  return fetchAPI(`/user-request-approve/${requestId}/approve`, {
     method: 'PATCH',
     body: JSON.stringify({ role, approvedBy }),
   });
 };
 
 export const rejectUserRequest = async (requestId: string) => {
-  return fetchAPI(`/user-requests/${requestId}/reject`, {
+  return fetchAPI(`/user-request-reject/${requestId}/reject`, {
     method: 'PATCH',
   });
 };
 
 // ========== CATEGORIES ==========
 export const getCategories = async () => {
-  return fetchAPI('/categories');
+  return fetchAPI('/categories-list');
 };
 
 export const addCategory = async (name: string) => {
-  return fetchAPI('/categories', {
+  return fetchAPI('/categories-list', {
     method: 'POST',
     body: JSON.stringify({ name }),
   });
 };
 
 export const deleteCategory = async (name: string) => {
-  return fetchAPI(`/categories/${encodeURIComponent(name)}`, {
+  return fetchAPI(`/category-delete/${encodeURIComponent(name)}`, {
     method: 'DELETE',
   });
 };
